@@ -1,6 +1,7 @@
 SampleApp::Application.routes.draw do
-
-  get "users/new"
+  resources :users
+  
+  #get "users/new" #this was removed when resources :users was added b/c all routes were added for users
   
   match '/signup', :to => 'users#new'
 
