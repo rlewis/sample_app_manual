@@ -1,9 +1,12 @@
 SampleApp::Application.routes.draw do
   resources :users
-  
+  resources :sessions, :only => [:new, :create, :destroy] #only is an options hash specifying to which action the sessions_controller should respond
+
   #get "users/new" #this was removed when resources :users was added b/c all routes were added for users
   
   match '/signup', :to => 'users#new'
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
 
   #note that the use of the match function automagically creates named routes for use in the controllers and views
   #eg. about_path => '/about'   AND   about_url => 'http://localhost:3000/about'   are created using match
@@ -11,8 +14,9 @@ SampleApp::Application.routes.draw do
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
-
+  
   root :to => 'pages#home'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
