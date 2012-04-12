@@ -49,6 +49,14 @@ class User < ActiveRecord::Base
 		user = find_by_id(id)
 		(user && user.salt == cookie_salt) ? user : nil
 	end
+    
+    # def update_login
+            # puts Time.new.utc
+            # puts self.last_login_at
+            # self.last_login_at = Time.new.utc
+            # self.save!
+            # puts self.last_login_at
+    # end
 	
 	private #specifies that all of the following methods are for internal use only
 		def encrypt_password
@@ -67,4 +75,6 @@ class User < ActiveRecord::Base
 		def secure_hash(string)
 			Digest::SHA2.hexdigest(string)
 		end
+        
+  
 end
